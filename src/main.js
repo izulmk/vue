@@ -5,10 +5,7 @@ import "bootstrap";
 import "bootstrap/dist/css/bootstrap.css";
 import "animate.css/animate.css";
 import { library } from "@fortawesome/fontawesome-svg-core";
-import {
-  faShoppingCart,
-  faDollarSign,
-} from "@fortawesome/free-solid-svg-icons";
+import { faShoppingCart, faDollarSign } from "@fortawesome/free-solid-svg-icons";
 
 import Products from "./components/Products";
 import Checkout from "./components/Checkout.vue";

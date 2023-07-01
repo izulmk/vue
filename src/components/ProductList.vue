@@ -1,17 +1,6 @@
 <template>
-  <transition-group
-    name="fade"
-    tag="div"
-    @beforeEnter="before"
-    @enter="enter"
-    @leave="leave"
-  >
-    <div
-      class="row mb-3 align-items-center"
-      v-for="(item, index) in showItem"
-      :key="index"
-      :data-index="index"
-    >
+  <transition-group name="fade" tag="div" @beforeEnter="before" @enter="enter" @leave="leave">
+    <div class="row mb-3 align-items-center" v-for="(item, index) in showItem" :key="index" :data-index="index">
       <div class="col-1 m-auto">
         <button class="btn btn-info" @click="$emit('add-item', item)">+</button>
       </div>
@@ -22,7 +11,7 @@
         <h3 class="text-info">{{ item.name }}</h3>
         <p class="mb-0">{{ item.description }}</p>
         <div class="h5 float-right">
-          <PriceDisplay :value="Number(item.price)" :precision="2" />
+          <Price :value="Number(item.price)" :precision="2" />
         </div>
       </div>
     </div>
@@ -30,12 +19,12 @@
 </template>
 
 <script>
-import PriceDisplay from "./PriceDisplay.vue";
+import Price from "./Price.vue";
 
 export default {
   name: "product-list",
   components: {
-    PriceDisplay,
+    Price,
   },
   props: ["products", "maximum"],
   computed: {
@@ -53,15 +42,13 @@ export default {
     enter: function (el) {
       var delay = el.dataset.index * 100;
       setTimeout(function () {
-        el.className =
-          "row d-flex mb-3 align-items-center animated fadeInRight";
+        el.className = "row d-flex mb-3 align-items-center animated fadeInRight";
       }, delay);
     },
     leave: function (el) {
       var delay = el.dataset.index * 100;
       setTimeout(function () {
-        el.className =
-          "row d-flex mb-3 align-items-center animated fadeOutRight";
+        el.className = "row d-flex mb-3 align-items-center animated fadeOutRight";
       }, delay);
     },
   },

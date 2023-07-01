@@ -4,10 +4,7 @@
     <table class="table table-hover" v-if="cart.length">
       <caption class="text-right h3">
         <b>Total:</b>
-        <price-display
-          class="d-block text-success font-weight-light"
-          :value="Number(cartTotal)"
-        ></price-display>
+        <price class="d-block text-success font-weight-light" :value="Number(cartTotal)"></price>
       </caption>
       <thead>
         <tr>
@@ -22,15 +19,8 @@
         <tr v-for="(item, index) in cart" :key="item.product.id">
           <td class="text-center">
             <div class="btn-group" role="group" aria-label="Basic example">
-              <button @click="$emit('add', item.product)" class="btn btn-info">
-                +
-              </button>
-              <button
-                @click="$emit('delete', index)"
-                class="btn btn-outline-info"
-              >
-                -
-              </button>
+              <button @click="$emit('add', item.product)" class="btn btn-info">+</button>
+              <button @click="$emit('delete', index)" class="btn btn-outline-info">-</button>
             </div>
           </td>
           <th scope="row">{{ item.product.name }}</th>
@@ -42,20 +32,18 @@
         </tr>
       </tbody>
     </table>
-    <router-link class="btn btn-sm btn-outline-info text-dark" to="/"
-      >Back to Shop</router-link
-    >
+    <router-link class="btn btn-sm btn-outline-info text-dark" to="/">Back to Shop</router-link>
   </div>
 </template>
 
 <script>
-import PriceDisplay from "./PriceDisplay.vue";
+import Price from "./Price.vue";
 
 export default {
   name: "CheckoutPage",
   props: ["cart", "cartTotal"],
   components: {
-    PriceDisplay,
+    Price,
   },
   methods: {
     formattedPrice(price) {
