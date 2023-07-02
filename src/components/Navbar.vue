@@ -1,7 +1,7 @@
 <template>
   <nav class="navbar navbar-light fixed-top">
     <div class="navbar-text ml-auto d-flex">
-      <button class="btn btn-sm btn-outline-success" @click="$parent.$emit('toggle-slide')">
+      <button class="btn btn-sm btn-outline-success" @click="$parent.$emit('toggle')">
         <font-awesome-icon icon="dollar-sign" />
       </button>
       <div class="dropdown ml-2" v-if="cart.length > 0">
@@ -18,11 +18,11 @@
                 {{ item.qty }}
               </span>
               {{ item.product.name }}
-              <b>{{ calculateTotal(item.qty, item.product.price) }}</b>
-              <a href="#" class="badge badge-danger text-white" @click.stop="$emit('delete-item', index)"> - </a>
+              <b>{{ (item.qty * item.product.price) | currencyFormat }}</b>
+              <a href="#" class="badge badge-danger text-white" @click.stop="$parent.$emit('delete', index)">-</a>
             </div>
           </div>
-          <router-link class="btn btn-sm btn-outline-info text-dark float-right mr-2" to="/checkout"> Checkout </router-link>
+          <router-link class="btn btn-sm btn-outline-info text-dark float-right mr-2" to="/checkout">Checkout</router-link>
         </div>
       </div>
     </div>
@@ -34,15 +34,15 @@ import Price from "./Price.vue";
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 
 export default {
-  name: "NavbarTag",
+  name: "Navbar",
   props: ["cart", "cartQty", "cartTotal"],
   components: {
     Price,
     FontAwesomeIcon,
   },
-  methods: {
-    calculateTotal(qty, price) {
-      return "Rp" + (qty * price).toFixed(2);
+  filters: {
+    currencyFormat: function (value) {
+      return "Rp" + Number.parseFloat(value).toFixed(2);
     },
   },
 };

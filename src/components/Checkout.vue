@@ -26,9 +26,7 @@
           <th scope="row">{{ item.product.name }}</th>
           <td class="text-center">{{ item.qty }}</td>
           <td class="text-right">{{ Number(item.product.price) }}</td>
-          <td class="text-right">
-            {{ Number(item.product.price * item.qty) }}
-          </td>
+          <td class="text-right">{{ Number(item.product.price * item.qty) }}</td>
         </tr>
       </tbody>
     </table>
@@ -40,18 +38,10 @@
 import Price from "./Price.vue";
 
 export default {
-  name: "CheckoutPage",
+  name: "Checkout",
   props: ["cart", "cartTotal"],
   components: {
     Price,
-  },
-  methods: {
-    formattedPrice(price) {
-      return "Rp" + Number.parseFloat(price).toFixed(2);
-    },
-    formattedSubtotal(price, qty) {
-      return "Rp" + Number.parseFloat(price * qty).toFixed(2);
-    },
   },
 };
 </script>
